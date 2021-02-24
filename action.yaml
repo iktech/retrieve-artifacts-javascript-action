@@ -1,0 +1,22 @@
+name: 'Retrieve Artifacts'
+description: 'Action retrieves specified artifacts details from the artifactz.io service'
+inputs:
+  serviceUrl:
+    description: 'URL of the artifactz service'
+    required: true
+    default: 'https://artifactor.artifactz.io'
+  apiToken:
+    description: API Token to use
+    required: true
+  artifacts:
+    description: 'Names of the artifacts to retrieve'
+    required: true
+outputs:
+  artifacts:
+    description: 'The artifact details, retrieved from the service'
+runs:
+  using: 'node12'
+  main: 'index.js'
+branding:
+  icon: 'octagon'
+  color: blue
