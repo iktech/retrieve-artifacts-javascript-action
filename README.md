@@ -14,7 +14,8 @@ This action retrieves artifact details from the specified stage at the https://a
 **Required** Stage where artifact is getting pushed from
 
 ### `artifacts`
-**Required** Names of the artifacts to retrieve
+**Required** Names of the artifacts to retrieve. It could be a name of the single artifact or the list of the artifacts, 
+presented in the form of JSON array
 
 ## Outputs
 ### `artifacts`
@@ -29,7 +30,11 @@ Then, you can retrieve the artifact details using this step:
   with:
     apiToken: ${{ secrets.ARTIFACTZ_TOKEN }}
     stage: Development
-    artifacts: 
-      - test
-      - artifactz-clients
+    artifacts: test
+- name: Retrieve Artifacts
+  uses: iktech/retrieve-artifacts-javascript-action@v1.0.0
+  with:
+    apiToken: ${{ secrets.ARTIFACTZ_TOKEN }}
+    stage: Development
+    artifacts: ["test", "artifactz-client"]
 ```

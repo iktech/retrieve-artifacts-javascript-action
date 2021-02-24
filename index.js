@@ -5,7 +5,9 @@ try {
     const serviceUrl = core.getInput('serviceUrl');
     const apiToken = core.getInput('apiToken');
     const stage = core.getInput('stage');
-    const artifacts = core.getInput('artifacts');
+    const artifactsString = core.getInput('artifacts');
+
+    let artifacts = JSON.parse(artifactsString);
 
     if (!apiToken) {
         core.setFailed('API token is required');
@@ -19,9 +21,21 @@ try {
         core.setFailed('Artifacts names are required');
     }
 
+    try {
+        artifacts = JSON.parse(artifacts);
+    } catch (e) {}
+
     console.log(`Retrieving artifact details from the stage '${stage}'`);
 
-    axios.get(`${serviceUrl}/stages/${stage}/list?${artifacts.map(n => `artifact=${n}`).join('&')}`, {
+    let params;
+
+    if (typeof artifacts === 'object') {
+        params = artifacts.map(n => `artifact=${n}`).join('&');
+    } else {
+        params = `artifact=${artifacts}`;
+    }
+
+    axios.get(`${serviceUrl}/stages/${stage}/list?${params}`, {
         headers: {
             'Content-Type': 'application/json',
             'User-Agent': 'Retrieve Artifacts Github Action v1.0.0',
