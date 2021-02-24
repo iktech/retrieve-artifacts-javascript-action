@@ -8,6 +8,9 @@ inputs:
   apiToken:
     description: API Token to use
     required: true
+  stage:
+    description: 'Names of the stage from which to retrieve artifacts info'
+    required: true
   artifacts:
     description: 'Names of the artifacts to retrieve'
     required: true
