@@ -21,19 +21,15 @@ try {
         core.setFailed('Artifacts names are required');
     }
 
+    let params;
     try {
         artifacts = JSON.parse(artifacts);
-    } catch (e) {}
-
-    console.log(`Retrieving artifact details from the stage '${stage}'`);
-
-    let params;
-
-    if (typeof artifacts === 'object') {
         params = artifacts.map(n => `artifact=${n}`).join('&');
-    } else {
+    } catch (e) {
         params = `artifact=${artifacts}`;
     }
+
+    console.log(`Retrieving artifact details from the stage '${stage}'`);
 
     axios.get(`${serviceUrl}/stages/${stage}/list?${params}`, {
         headers: {
