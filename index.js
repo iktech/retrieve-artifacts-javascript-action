@@ -42,7 +42,11 @@ try {
             core.setFailed(`Cannot retrieve artifacts: ${response.data.message}`);
         } else {
             console.log(`Successfully retrieved artifacts from the server`);
-            core.setOutput('artifacts', response.data);
+            let data = {}
+            response.data.artifacts.forEach((item) => {
+                data[item.artifact_name] = item.version
+            });
+            core.setOutput('artifacts', data);
         }
     }).catch(error => {
         core.setFailed(error.response.data.error);
