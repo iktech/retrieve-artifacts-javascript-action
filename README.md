@@ -19,22 +19,29 @@ presented in the form of JSON array
 
 ## Outputs
 ### `artifacts`
-The retrieved artifacts details 
+The retrieved artifacts details in the form of the map, where key is the artifact name.
 
 ## Example
 Before adding this action to your workflow, set a secret with the API token in your project.
 Then, you can retrieve the artifact details using this step:
 ```yaml
 - name: Retrieve Artifacts
-  uses: iktech/retrieve-artifacts-javascript-action@v1.0.0
+  uses: iktech/retrieve-artifacts-javascript-action@v1.0.2
+  id: single
   with:
     apiToken: ${{ secrets.ARTIFACTZ_TOKEN }}
     stage: Development
     artifacts: test
 - name: Retrieve Artifacts
-  uses: iktech/retrieve-artifacts-javascript-action@v1.0.0
+  uses: iktech/retrieve-artifacts-javascript-action@v1.0.2
+  id: multiple
   with:
     apiToken: ${{ secrets.ARTIFACTZ_TOKEN }}
     stage: Development
     artifacts: ["test", "artifactz-client"]
+- name: Display details
+  run: |
+    echo ${{ steps.single.outputs.test }}
+    echo ${{ steps.multiple.outputs.test }}
+    echo ${{ steps.multiple.outputs.artifactz-client }}
 ```
