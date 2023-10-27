@@ -7,8 +7,6 @@ try {
     const stage = core.getInput('stage');
     const artifactsString = core.getInput('artifacts');
 
-    let artifacts = JSON.parse(artifactsString);
-
     if (!apiToken) {
         core.setFailed('API token is required');
     }
@@ -17,16 +15,16 @@ try {
         core.setFailed('Stage is required');
     }
 
-    if (!artifacts) {
+    if (!artifactsString) {
         core.setFailed('Artifacts names are required');
     }
 
     let params;
     try {
-        artifacts = JSON.parse(artifacts);
+        const artifacts = JSON.parse(artifactsString);
         params = artifacts.map(n => `artifact=${n}`).join('&');
     } catch (e) {
-        params = `artifact=${artifacts}`;
+        params = `artifact=${artifactsString}`;
     }
 
     console.log(`Retrieving artifact details from the stage '${stage}'`);
