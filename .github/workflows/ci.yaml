@@ -1,0 +1,39 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x] # Use the Node.js version suitable for your project
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Jest tests
+        run: npm test
+        env:
+          ARTIFACTZ_TOKEN: ${{ secrets.ARTIFACTZ_TOKEN }}
+
+      - name: Publish test results
+        if: always()
+        uses: mikepenz/action-junit-report@v2
+        with:
+          report_paths: 'junit.xml' # This assumes Jest outputs a junit.xml file. Adjust the path as necessary.
+          github_token: ${{ secrets.GITHUB_TOKEN }}
