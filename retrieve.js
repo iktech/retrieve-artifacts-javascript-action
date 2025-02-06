@@ -29,7 +29,7 @@ async function retrieve(serviceUrl, apiToken, stage, artifactsString) {
         const response = await axios.get(`${serviceUrl}/stages/${stage}/list?${params}`, {
             headers: {
                 'Content-Type': 'application/json',
-                'User-Agent': 'Retrieve Artifacts Github Action v1.0.0',
+                'User-Agent': 'Retrieve Artifacts Github Action v1.1.0',
                 'Authorization': `Bearer ${apiToken}`,
             }
         });

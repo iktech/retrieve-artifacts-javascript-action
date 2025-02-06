@@ -5,7 +5,7 @@ This action retrieves artifact details from the specified stage at the https://a
 ## Inputs
 ### `serviceUrl`
 **Required** The URL of the artifactz.io service. 
-*Default:* https://artifactor.artifactz.io
+*Default:* https://api.artifactz.io
 
 ### `apiToken`
 **Required** The API token with write permissions 

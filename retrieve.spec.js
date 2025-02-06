@@ -4,7 +4,7 @@ const retrieve = require('./retrieve');
 
 test('retrieve single artifact details', () => {
     let version;
-    return retrieve('https://artifactor.uat.artifactz.io',
+    return retrieve('https://api.uat.artifactz.io',
         process.env.ARTIFACTZ_TOKEN,
         'Development',
         'test-data')
@@ -15,7 +15,7 @@ test('retrieve single artifact details', () => {
 
 test('retrieve multiple artifact details', () => {
     let version;
-    return retrieve('https://artifactor.uat.artifactz.io',
+    return retrieve('https://api.uat.artifactz.io',
         process.env.ARTIFACTZ_TOKEN,
         'Development',
         '["test-data", "frontend"]')
@@ -27,7 +27,7 @@ test('retrieve multiple artifact details', () => {
 
 test('retrieve no token', () => {
     let version;
-    return retrieve('https://artifactor.uat.artifactz.io',
+    return retrieve('https://api.uat.artifactz.io',
         process.env.ARTIFACTZ_TOKEN,
         '',
         '["test-data", "frontend"]')
@@ -38,7 +38,7 @@ test('retrieve no token', () => {
 
 test('retrieve no artifacts', () => {
     let version;
-    return retrieve('https://artifactor.uat.artifactz.io',
+    return retrieve('https://api.uat.artifactz.io',
         process.env.ARTIFACTZ_TOKEN,
         'Development',
         '')
@@ -49,7 +49,7 @@ test('retrieve no artifacts', () => {
 
 test('retrieve no stage', () => {
     let version;
-    return retrieve('https://artifactor.uat.artifactz.io',
+    return retrieve('https://api.uat.artifactz.io',
         '',
         'Development',
         '["test-data", "frontend"]')

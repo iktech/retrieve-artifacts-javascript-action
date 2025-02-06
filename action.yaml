@@ -4,7 +4,7 @@ inputs:
   serviceUrl:
     description: 'URL of the artifactz service'
     required: true
-    default: 'https://artifactor.artifactz.io'
+    default: 'https://api.artifactz.io'
   apiToken:
     description: API Token to use
     required: true
